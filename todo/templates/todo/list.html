@@ -14,6 +14,10 @@
     <title>{{title}}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="">
     <style>
         body {
@@ -33,6 +37,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
             border: 1px solid rgb(246, 244, 244);
+            overflow: hidden;
         }
 
         .card hr {
@@ -83,8 +88,8 @@
     <nav class="nav">
         
             
-           <a href="{% url 'add' %}">Add Todo</a>
-            <a href="{% url 'todo'  %}">All Todo</a>
+           <a href="{% url 'add' %}">ALL Todo</a>
+            <a href="{% url 'todo'  %}">Add Todo</a>
         
     </nav>
 
@@ -94,10 +99,23 @@
         <b>{{i.title}}</b>
         
         <p>{{i.details}}</p>
-        <form action="/del/{{i.title}}" method="POST" style="padding-right: 4%; padding-bottom: 3%;">
+        <form action="/del/{{i.id}}" method="POST" style="padding-right: 4%; padding-bottom: 3%;">
             {% csrf_token %}
             <button value="Remove Todo" type="submit" class="btn btn-primary" style="float: right;"><span class="glyphicon glyphicon-trash"></span> Remove Todo</button>
         </form>
+        {% if i.status  %}
+        <form  action="/edit/{{i.id}}/true" style="padding-right: 4%; padding-bottom:6%;"></form>
+        <button type="submit" class="btn btn-primary" style="float:left;background-color: green;" disabled>Completed</button>
+    </form>
+
+        {% else %}
+        <form  action="/edit/{{i.id}}/true" style="padding-right: 4%; padding-bottom:6%;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary" style="float:left;">Mark As Completed</button>
+        </form>
+        
+
+        {% endif %}
     </div>
     {% endfor %}
 

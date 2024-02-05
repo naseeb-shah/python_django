@@ -35,7 +35,11 @@ text-overflow: ellipsis;
 	background-color: azure;
 	font-size: x-large;
 }
-
+body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(143, 140, 171); /* Set your desired background color */
+        }
 </style>
 
 </head>
@@ -44,7 +48,7 @@ text-overflow: ellipsis;
 	<nav class="nav">
      
             
-           <a href="{% url 'add' %}">Add Todo</a><a href="{% url 'todo'  %}">All Todo</a>
+           <a href="{% url 'add' %}">ALL Todo</a><a href="{% url 'todo'  %}">Add Todo</a>
     </nav>
 
 {% if messages %}
@@ -55,15 +59,14 @@ text-overflow: ellipsis;
 {% endfor %}
 {% endif %}
 
-<center class="row">
-	<h1><i>__TODO LIST__</i></h1>
-	<hr />
-</center>	
+<center>
 	<form method="POST">
 		{% csrf_token %}
 		<div>
 		<label  >Todo Title</label>
+		<div>
 		{{forms.title}}
+	</div>
 	</div>
 	<label>Description</label>
 	<div>
@@ -73,6 +76,7 @@ text-overflow: ellipsis;
 		<input type="submit"  value="Submit" />
 	
 	</form>
+</center>
 	</div>
 </div>
 </div>
