@@ -1,0 +1,109 @@
+
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{title}}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(143, 140, 171); /* Set your desired background color */
+        }
+
+        .card {
+            background-color: rgb(143, 140, 171);
+            width: 40%;
+            margin: auto;
+            color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            border: 1px solid rgb(246, 244, 244);
+        }
+
+        .card hr {
+            border-color: #fff;
+        }
+
+        .card button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        .card button:hover {
+            background-color: #2980b9;
+        }
+
+        .card b {
+            font-size: 24px;
+        }
+
+        .card p {
+            font-size: 18px;
+        }
+        .heading{
+            font-size: 50px;
+            margin-top: 50px;
+            font-weight: 700;
+            color: white;
+            
+
+        }
+        .nav{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	background-color: azure;
+	font-size: x-large;
+}
+
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        
+            
+           <a href="{% url 'add' %}">Add Todo</a>
+            <a href="{% url 'todo'  %}">All Todo</a>
+        
+    </nav>
+
+    <Center class="heading">All Todo</Center>
+    {% for i in list %}
+    <div class="card">
+        <b>{{i.title}}</b>
+        
+        <p>{{i.details}}</p>
+        <form action="/del/{{i.title}}" method="POST" style="padding-right: 4%; padding-bottom: 3%;">
+            {% csrf_token %}
+            <button value="Remove Todo" type="submit" class="btn btn-primary" style="float: right;"><span class="glyphicon glyphicon-trash"></span> Remove Todo</button>
+        </form>
+    </div>
+    {% endfor %}
+
+    <script src="" async defer></script>
+</body>
+
+</html>
+
+
